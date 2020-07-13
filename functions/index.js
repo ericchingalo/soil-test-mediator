@@ -13,18 +13,18 @@ admin.initializeApp({
 });
 const db = admin.firestore();
 
-app.get('/api', (req, res) => {
-  return res.status(200).send('Hello, Welcome to Soil test mediator api!');
-});
-
 // create
 app.post('/api/create', (req, res) => {
   (async () => {
     try {
       await db
-        .collection('items')
+        .collection('soil-results')
         .doc('/' + req.body.id + '/')
-        .create({ item: req.body.item });
+        .create({
+          pH: req.body.pH,
+          moisture: req.body.moisture,
+          temperature: req.body.temperature,
+        });
       return res.status(200).send();
     } catch (error) {
       console.log(error);
