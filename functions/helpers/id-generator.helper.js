@@ -10,3 +10,5 @@ function generateRandomId() {
   }
   return uuid;
 }
+
+module.exports = generateRandomId;

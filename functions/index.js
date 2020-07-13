@@ -2,6 +2,8 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const express = require('express');
 const cors = require('cors');
+const generateRandomId = require('./helpers/id-generator.helper');
+
 const app = express();
 app.use(cors({ origin: true }));
 
@@ -18,7 +20,7 @@ app.post('/api/create', (req, res) => {
   (async () => {
     try {
       await db
-        .collection('soil-results')
+        .collection('results')
         .doc('/' + generateRandomId() + '/')
         .create({
           pH: req.body.pH,
