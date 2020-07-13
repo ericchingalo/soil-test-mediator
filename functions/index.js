@@ -19,7 +19,7 @@ app.post('/api/create', (req, res) => {
     try {
       await db
         .collection('soil-results')
-        .doc('/' + req.body.id + '/')
+        .doc('/' + generateRandomId() + '/')
         .create({
           pH: req.body.pH,
           moisture: req.body.moisture,
