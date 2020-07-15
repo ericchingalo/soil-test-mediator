@@ -16,18 +16,20 @@ admin.initializeApp({
 const db = admin.firestore();
 
 // create
-app.post('/api/create', (req, res) => {
+app.post('/api/save', (req, res) => {
   (async () => {
+    const data = {
+      pH: Number(req.query.pH),
+      moisture: Number(req.query.moisture),
+      temperature: Number(req.query.temperature),
+    };
+
     try {
       await db
         .collection('results')
         .doc('/' + generateRandomId() + '/')
-        .create({
-          pH: req.body.pH,
-          moisture: req.body.moisture,
-          temperature: req.body.temperature,
-        });
-      return res.status(200).send();
+        .create(data);
+      return res.status(200).send({ message: 'created', data });
     } catch (error) {
       console.log(error);
       return res.status(500).send(error);
