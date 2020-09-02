@@ -19,9 +19,14 @@ const db = admin.firestore();
 app.post('/api/save', (req, res) => {
   (async () => {
     const data = {
-      pH: Number(req.query.pH),
-      moisture: Number(req.query.moisture),
-      temperature: Number(req.query.temperature),
+      testerName: req.query.user,
+      location: req.query.location,
+      recoredAt: new Date(),
+      results: {
+        pH: Number(req.query.pH),
+        moisture: Number(req.query.moisture),
+        temperature: Number(req.query.temperature),
+      },
     };
 
     try {
